@@ -53,7 +53,7 @@ function createComment(rowKey, cb, iteration) {
 		} else {
 			updateCell(rowKey, 'comment:author'+iteration, ['foo','bar', 'baz', 'blarg'][Math.floor(Math.random() * 4)]);
 			updateCell(rowKey, 'comment:text'+iteration, "text..." + Math.random()*3.1415);
-			updateCell(rowKey, 'comment:num'+iteration, commentNumber);
+			updateCell(rowKey, 'comment:num'+iteration, JSON.stringify(commentNumber));
 			commentNumber++;
 			if(cb)
 				cb();
@@ -63,7 +63,7 @@ function createComment(rowKey, cb, iteration) {
 
 function troll() {
 	randomRowKey(function(rk) {
-		util.puts('troll: ' + rk);
+		util.puts('troll ' + commentNumber + ' : ' + rk);
 		createComment(rk, troll);
 	});
 };
